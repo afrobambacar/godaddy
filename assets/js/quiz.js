@@ -75,6 +75,7 @@
       var z = parseInt(answer, 10);
 
       $('.result_pannel').removeClass('bg-success bg-danger');
+      $('.answer').focus();
       
       if (this.z === z) {
         this._correct = this._correct + 1;
