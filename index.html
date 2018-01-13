@@ -85,6 +85,11 @@
       },
       challenge: function (e) {
         var answer = $('.answer').val();
+
+        if (answer === '') {
+          return;
+        }
+        
         var z = parseInt(answer, 10);
 
         if (this.z === z) {
