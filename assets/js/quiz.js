@@ -49,6 +49,13 @@
       
       this.render();
     },
+    getNumber: function () {
+      if (this.options.type !== 'addition') {
+        return Math.floor(Math.random() * 9) + 1;
+      } else {
+        return Math.floor(Math.random() * 100);
+      }
+    },
     render: function () {
       $('.x').text(this.x);
       $('.y').text(this.y);
@@ -57,13 +64,6 @@
       $('.skip_count').text(this._skip);
       $('.answer').val('');
       $('.answer').focus();
-    },
-    getNumber: function () {
-      if (this.options.type !== 'addition') {
-        return Math.floor(Math.random() * 9) + 1;
-      } else {
-        return Math.floor(Math.random() * 100);
-      }
     },
     challenge: function (e) {
       var answer = $('.answer').val();
