@@ -5,7 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <style>
+    .result_pannel {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+    }
     .result {
+      color: #fff;
       font-size: 200px;
     }
   </style>
@@ -33,9 +43,12 @@
       </div>
     </div>
   </div>
-  <center>
-    <h1 class="result"></h1>
-  <center>
+  
+  <div class="result_pannel">
+    <center>
+      <h1 class="result"></h1>
+    <center>
+  </div>
 
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
   <script>
@@ -96,13 +109,16 @@
 
         var z = parseInt(answer, 10);
 
+        $('.result_pannel').removeClass('bg-success bg-danger');
         if (this.z === z) {
-          $('.result').text('딩동댕').fadeIn().delay(1000).fadeOut();
+          $('.result').text('딩동댕');
+          $('.result_pannel').addClass('bg-success').fadeIn().delay(700).fadeOut();
           this._correct = this._correct + 1;
           this.generateQuiz();
           return;
         }
-        $('.result').text('땡').fadeIn().delay(1000).fadeOut();
+        $('.result').text('땡')
+        $('.result_pannel').addClass('bg-danger').fadeIn().delay(700).fadeOut();
         this._incorrect = this._incorrect + 1;
         this.generateQuiz();
         return;
