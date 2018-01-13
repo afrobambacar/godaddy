@@ -13,7 +13,7 @@
 <body>
   <div class="jumbotron">
     <div class="container">
-      <h1>로아를 위한 수학 연산</h1>
+      <h3>로아를 위한 수학 연산</h3>
       <form class="form-inline">
         <h1>
           <span class="x">6</span> x <span class="y">6</span> = <input type="number" class="form-control input-lg answer" min="0" inputmode="numeric" pattern="\d*">
@@ -27,6 +27,10 @@
         <li>땡: <span class="incorrect_count"></span></li>
         <li>패스: <span class="skip_count"></span></li>
       </ul>
+
+      <div>
+        <p><a href="https://afrobambacar.github.io/math-quiz-for-kids/sum.html">덧셈</a></p>
+      </div>
     </div>
   </div>
   <center>
@@ -89,7 +93,7 @@
         if (answer === '') {
           return;
         }
-        
+
         var z = parseInt(answer, 10);
 
         if (this.z === z) {
