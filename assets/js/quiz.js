@@ -1,10 +1,10 @@
 (function (factory) {
+  // Only works in window.
   var root = self;
 
   root.Quiz = factory(root, (root.jQuery || root.$));
-
 })(function (root, $) {
-  function _Quiz(options) {
+  function Quiz(options) {
     this.options = options || {};
     
     $.extend({ type: 'addition' }, this.options);
@@ -16,7 +16,7 @@
     this.initialize();
   }
 
-  $.extend(_Quiz.prototype, {
+  $.extend(Quiz.prototype, {
     initialize: function () {
       this.handlers = {
         'form submit': 'doNothing',
@@ -75,18 +75,27 @@
       var z = parseInt(answer, 10);
 
       $('.result_pannel').removeClass('bg-success bg-danger');
+      
       if (this.z === z) {
-        $('.result').text('딩동댕');
-        $('.result_pannel').addClass('bg-success').fadeIn().delay(700).fadeOut();
         this._correct = this._correct + 1;
-        this.generateQuiz();
+        this.showResult(true);
         return;
       }
-      $('.result').text('땡')
-      $('.result_pannel').addClass('bg-danger').fadeIn().delay(700).fadeOut();
+
       this._incorrect = this._incorrect + 1;
-      this.generateQuiz();
+      this.showResult(false);
       return;
+    },
+    showResult: function (correct) {
+      var text = correct ? '딩동댕' : '땡';
+      var background = correct ? 'bg-success' : 'bg-danger';
+
+      $('.result').text(text);
+      $('.result_pannel')
+        .addClass(background)
+        .fadeIn()
+        .delay(400)
+        .fadeOut(400, this.generateQuiz.bind(this));
     },
     skip: function (e) {
       e.preventDefault();
@@ -94,9 +103,11 @@
       this.generateQuiz();
     },
     doNothing: function (e) {
-      e.preventDefault();
+      if (e) {
+        e.preventDefault();  
+      }
     }
   });
 
-  return _Quiz;
+  return Quiz;
 });
