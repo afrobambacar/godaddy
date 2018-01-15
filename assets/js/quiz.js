@@ -98,14 +98,19 @@
       return;
     },
     showResult: function (correct) {
-      var text = correct ? '딩동댕' : '땡';
       var background = correct ? 'bg-success' : 'bg-danger';
+      var delay = correct ? 400 : 1500;
+      if (correct) {
+        var text = '딩동댕';
+      } else {
+        var text = '땡! 정답은 ' + this.z;
+      }
 
       $('.result').text(text);
       $('.result_pannel')
         .addClass(background)
         .fadeIn()
-        .delay(400)
+        .delay(delay)
         .fadeOut(400, this.generateQuiz.bind(this));
     },
     skip: function (e) {
