@@ -41,19 +41,29 @@
       this.x = this.getNumber();
       this.y = this.getNumber();
       
-      if (this.options.type !== 'addition') {
-        this.z = this.x * this.y;  
-      } else {
+
+      if (this.options.type === 'addition') {
         this.z = this.x + this.y;
+      } else if (this.options.type === 'subtraction') {
+        var numbers = [this.x, this.y];
+
+        numbers.sort(function (a, b) {
+          return b - a;
+        });
+        this.x = numbers[0];
+        this.y = numbers[1];
+        this.z = this.x - this.y;
+      } else {
+        this.z = this.x * this.y;        
       }
       
       this.render();
     },
     getNumber: function () {
-      if (this.options.type !== 'addition') {
-        return Math.floor(Math.random() * 9) + 1;
-      } else {
+      if (this.options.type === 'addition' || this.options.type === 'subtraction') {
         return Math.floor(Math.random() * 100);
+      } else {
+        return Math.floor(Math.random() * 9) + 1;
       }
     },
     render: function () {
