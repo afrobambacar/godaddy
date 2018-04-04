@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>아빠수학</title>
+  <title>아빠영어</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/quiz.css">
@@ -9,10 +9,10 @@
 <body>
   <div class="jumbotron">
     <div class="container">
-      <h3>아이들을 위한 뺄셈 연산</h3>
+      <h3>아이들을 위한 ABC</h3>
       <form class="form-inline">
         <h1>
-          <span class="x">6</span> - <span class="y">6</span> = <input type="number" class="form-control input-lg answer" min="0" inputmode="numeric" pattern="\d*">
+          <span class="x">6</span> <span class="y">6</span> <input type="text" class="form-control input-lg answer">
         </h1>
 
         <button class="btn btn-primary btn-lg challenge">맞추기</button>
@@ -60,8 +60,9 @@
   <script src="assets/js/libs/backbone.js"></script>
   <script src="assets/js/quiz.js"></script>
   <script>
-    var quiz = new Quiz({ type: 'subtraction' });
+    var quiz = new Quiz({ type: 'alphabet' });
   </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113412341-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -70,5 +71,6 @@
 
     gtag('config', 'UA-113412341-1');
   </script>
+
 </body>
 </html>

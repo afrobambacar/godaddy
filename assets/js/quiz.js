@@ -24,10 +24,14 @@
         '.skip click': 'skip'
       };
 
-      this.registerHandler();
-      this.generateQuiz();
+      if (this.options.type === 'alphabet') {
+        this.dictionary = this._getDictionary();
+      }
+
+      this._registerHandler();
+      this._generateQuiz();
     },
-    registerHandler: function () {
+    _registerHandler: function () {
       var self = this;
       $.each(this.handlers, function(k, v) {
         var split = k.split(" ");
@@ -37,12 +41,18 @@
         $(document).delegate(el, trigger, self[v].bind(self));
       });
     },
-    generateQuiz: function () {
-      this.x = this.getNumber();
-      this.y = this.getNumber();
+    _generateQuiz: function () {
+      if (this.options.type === 'alphabet') {
+        this.x = this.dictionary[0].x;
+        this.y = this.dictionary[0].y;
+      } else {
+        this.x = this._getNumber();
+        this.y = this._getNumber();
+      }
       
-
-      if (this.options.type === 'addition') {
+      if (this.options.type === 'alphabet') {
+        this.z = this.dictionary[0].z;
+      } else if (this.options.type === 'addition') {
         this.z = this.x + this.y;
       } else if (this.options.type === 'subtraction') {
         var numbers = [this.x, this.y];
@@ -59,12 +69,44 @@
       
       this.render();
     },
-    getNumber: function () {
+    _getNumber: function () {
       if (this.options.type === 'addition' || this.options.type === 'subtraction') {
         return Math.floor(Math.random() * 100);
       } else {
         return Math.floor(Math.random() * 9) + 1;
       }
+    },
+    _getDictionary: function () {
+      var dictionary = [
+        { x: 'A', y: 'a', z: '에이' },
+        { x: 'B', y: 'b', z: '비' }, 
+        { x: 'C', y: 'c', z: '씨' }, 
+        { x: 'D', y: 'd', z: '디' }, 
+        { x: 'E', y: 'e', z: '이' }, 
+        { x: 'F', y: 'f', z: '에프' }, 
+        { x: 'G', y: 'g', z: '쥐' }, 
+        { x: 'H', y: 'h', z: '에이취' }, 
+        { x: 'I', y: 'i', z: '아이' }, 
+        { x: 'J', y: 'j', z: '제이' }, 
+        { x: 'K', y: 'k', z: '케이' }, 
+        { x: 'L', y: 'l', z: '엘' }, 
+        { x: 'M', y: 'm', z: '엠' }, 
+        { x: 'N', y: 'n', z: '엔' },
+        { x: 'O', y: 'o', z: '오' }, 
+        { x: 'P', y: 'p', z: '피' }, 
+        { x: 'Q', y: 'q', z: '큐' }, 
+        { x: 'R', y: 'r', z: '알' }, 
+        { x: 'S', y: 's', z: '에스' }, 
+        { x: 'T', y: 't', z: '티' }, 
+        { x: 'U', y: 'u', z: '유' }, 
+        { x: 'V', y: 'v', z: '브이' }, 
+        { x: 'W', y: 'w', z: '더블유' }, 
+        { x: 'X', y: 'x', z: '엑스' }, 
+        { x: 'Y', y: 'y', z: '와이' }, 
+        { x: 'Z', y: 'z', z: '지' }, 
+      ];
+
+      return _.shuffle(dictionary);
     },
     render: function () {
       $('.x').text(this.x);
@@ -82,7 +124,18 @@
         return;
       }
 
-      var z = parseInt(answer, 10);
+      if (this.options.type === 'alphabet') {
+        var z = answer;
+        
+        this.dictionary.shift();
+        
+        console.log(this.dictionary.length);
+        if (!this.dictionary.length) {
+          this.dictionary = this._getDictionary();
+        }
+      } else {
+        var z = parseInt(answer, 10);
+      }
 
       $('.result_pannel').removeClass('bg-success bg-danger');
       $('.answer').focus();
@@ -111,12 +164,12 @@
         .addClass(background)
         .fadeIn()
         .delay(delay)
-        .fadeOut(400, this.generateQuiz.bind(this));
+        .fadeOut(400, this._generateQuiz.bind(this));
     },
     skip: function (e) {
       e.preventDefault();
       this._skip = this._skip + 1;
-      this.generateQuiz();
+      this._generateQuiz();
     },
     doNothing: function (e) {
       if (e) {
