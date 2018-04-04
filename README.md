@@ -10,3 +10,5 @@
 
 * [곱셈연산](https://afrobambacar.github.io/math-quiz-for-kids)
 * [덧셈연산](https://afrobambacar.github.io/math-quiz-for-kids/addition.html)
+* [뺄셈연산](https://afrobambacar.github.io/math-quiz-for-kids/subtraction.html)
+* [알파벳](https://afrobambacar.github.io/math-quiz-for-kids/alphabet.html)
