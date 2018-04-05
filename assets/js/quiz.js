@@ -43,15 +43,15 @@
     },
     _generateQuiz: function () {
       if (this.options.type === 'alphabet') {
-        this.x = this.dictionary[0].x;
-        this.y = this.dictionary[0].y;
+        this.x = this.dictionary[0].z;
+        this.y = '';
       } else {
         this.x = this._getNumber();
         this.y = this._getNumber();
       }
       
       if (this.options.type === 'alphabet') {
-        this.z = this.dictionary[0].z;
+        this.z = this.dictionary[0].y;
       } else if (this.options.type === 'addition') {
         this.z = this.x + this.y;
       } else if (this.options.type === 'subtraction') {
@@ -106,7 +106,7 @@
         { x: 'Z', y: 'z', z: '지' }, 
       ];
 
-      return _.shuffle(dictionary);
+      return dictionary;
     },
     render: function () {
       $('.x').text(this.x);
