@@ -51,7 +51,7 @@
       }
       
       if (this.options.type === 'alphabet') {
-        this.z = this.dictionary[0].y;
+        this.z = this.dictionary[0].x + this.dictionary[0].y;
       } else if (this.options.type === 'addition') {
         this.z = this.x + this.y;
       } else if (this.options.type === 'subtraction') {
